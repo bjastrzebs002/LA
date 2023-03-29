@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LoL Advice</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>League of Legends Advice</h1>
+    <form id="summoner-form">
+        <label for="summoner_name">Summoner Name:</label>
+        <input type="text" id="summoner_name" name="summoner_name">
+        <button type="submit">Get Advice</button>
+    </form>
+    <div id="advice"></div>
+
+    <script>
+    $(document).ready(function() {
+        $("#summoner-form").submit(function(event) {
+            event.preventDefault();
+            $.post("/get_advice", $(this).serialize())
+                .done(function(data) {
+                    console.log('Response received:', data);
+                    if (data.error) {
+                        $("#advice").text(data.error);
+                    } else {
+                        $("#advice").text(data.advice);
+                    }
+                })
+                .fail(function(jqXHR, textStatus, errorThrown) {
+                    console.error('Error:', textStatus, errorThrown);
+                    $("#advice").text('An error occurred while processing your request. Please try again later.');
+                });
+        });
+    });
+</script>
+</body>
+</html>

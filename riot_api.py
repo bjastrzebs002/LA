@@ -1,5 +1,5 @@
 import requests
-from secrets import get_secret_param
+from secrets_smm import get_secret_param
 
 API_KEY = get_secret_param("riot_api_key")
 REGION = 'EUN1'

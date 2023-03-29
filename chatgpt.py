@@ -2,7 +2,7 @@ import time
 
 import openai
 from riot_api import get_champion_data
-from secrets import get_secret_param
+from secrets_smm import get_secret_param
 
 
 # Set up the OpenAI API client

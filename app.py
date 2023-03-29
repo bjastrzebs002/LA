@@ -1,9 +1,18 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, request, jsonify
 from main import job
 from flask import send_from_directory
 import os
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 
 app = Flask(__name__)
+
+limiter = Limiter(
+    get_remote_address,
+    app=app,
+    default_limits=["1 per minute"],
+    storage_uri="memory://",
+)
 
 
 @app.route('/', defaults={'path': ''})
@@ -16,6 +25,7 @@ def catch_all(path):
 
 
 @app.route("/api/get_advice", methods=["POST"])
+@limiter.limit("1/minute", override_defaults=False)
 def get_advice():
     summoner_name = request.json["summoner_name"]
     if not summoner_name:

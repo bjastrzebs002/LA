@@ -24,7 +24,8 @@ def generate_advice(participant_data, ally_data, enemy_data):
         f"3. How to use my skills combinations (combo) against enemies "
         f"4. How to play in late game state against these enemies "
         f"Translate your answer to {language} "
-        f"In your response start from: 'You are playing champion <player_champion> with <ally_champions> against <enemy_champions>'. Each sentence should be in the next line."
+        f"In your response start from: 'You are playing champion <player_champion> with <ally_champions> against <enemy_champions>'. "
+        f"Each sentence should be in the next line (put <br> between sentences please)."
     )
 
     response = openai.Completion.create(

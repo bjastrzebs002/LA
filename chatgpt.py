@@ -27,15 +27,14 @@ def generate_advice(participant_data, ally_data, enemy_data):
         f"In your response start from: 'You are playing champion <player_champion> with <ally_champions> against <enemy_champions>'. Each sentence should be in the next line."
     )
 
-    # response = openai.Completion.create(
-    #     engine="text-davinci-003",
-    #     prompt=prompt,
-    #     max_tokens=1000,
-    #     n=1,
-    #     stop=None,
-    #     temperature=0.5,
-    # )
-    time.sleep(10)
-    # advice = response.choices[0].text.strip()
-    advice = "This is the advice"
+    response = openai.Completion.create(
+        engine="text-davinci-003",
+        prompt=prompt,
+        max_tokens=1000,
+        n=1,
+        stop=None,
+        temperature=0.5,
+    )
+
+    advice = response.choices[0].text.strip()
     return advice
